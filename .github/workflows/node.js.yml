@@ -15,10 +15,10 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [18.17.0]
+        node-version: [22.14.0]
     environment: test
     steps:
       - uses: actions/checkout@v3
@@ -41,9 +41,23 @@ jobs:
           wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
           echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
           sudo apt-get update
-          sudo apt-get install -y mongodb-mongosh
-      - name: Test mongo connection
+          sudo apt-get install -y mongodb-mongosh mongodb-org-tools
+      - name: Test mongo connection & Restore DB
         run: 'sudo mongosh localhost:27017'
+      - name: pruebas
+        run: |
+          ls -lsha ${{ github.workspace }}/docker/json
+          ls -lsha ${{ github.workspace }}/docker/json/users.json
+      - name: Restore DB
+        run: |
+          mongoimport -h $DB_HOST:$DB_PORT -d $DB_NAME -c permissions --file ${{ github.workspace }}/docker/json/permissions.json
+          mongoimport -h $DB_HOST:$DB_PORT -d $DB_NAME -c roles --file ${{ github.workspace }}/docker/json/roles.json
+          mongoimport -h $DB_HOST:$DB_PORT -d $DB_NAME -c tokens --file ${{ github.workspace }}/docker/json/tokens.json
+          mongoimport -h $DB_HOST:$DB_PORT -d $DB_NAME -c users --file ${{ github.workspace }}/docker/json/users.json
+        env:
+          DB_NAME: ${{ vars.DB_NAME }}
+          DB_HOST: localhost
+          DB_PORT: 27017
       - name: create env file
         run: |
           touch .env
@@ -87,8 +101,7 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
