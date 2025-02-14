@@ -3,16 +3,16 @@
   "version": "v1.0.0",
   "description": "A simple graphql in javascript using apollo server",
   "main": "src/index.js",
-  "author": "Joel Alvarez Mexia <jeresoft@gmail.com>",
+  "author": "Carlos Adolfo Ruiz Rodríguez <karlosarr@protonmail.com>",
   "license": "MIT",
   "private": false,
   "engines": {
-    "node": ">=18.17.0",
+    "node": ">=22.14.0",
     "npm": ">=9.6.7"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jeresoftx/javascript-grapqhl-simple.git"
+    "url": "git+https://github.com/karlosarr/nodejs-grapqhl.git"
   },
   "keywords": [
     "javascript",
@@ -20,9 +20,9 @@
     "skeleton"
   ],
   "bugs": {
-    "url": "https://github.com/jeresoftx/javascript-grapqhl-simple/issues"
+    "url": "https://github.com/karlosarr/nodejs-grapqhl/issues"
   },
-  "homepage": "https://github.com/jeresoftx/javascript-grapqhl-simple#readme",
+  "homepage": "https://github.com/karlosarr/nodejs-grapqhl#readme",
   "dependencies": {
     "@sentry/node": "^5.30.0",
     "@sentry/tracing": "^7.11.1",
