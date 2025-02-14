@@ -76,11 +76,11 @@ jobs:
           TOKEN_JWT: ${{ secrets.TOKEN_JWT }}
       - name: Restore DB
         run: |
-          mongorestore --host $DB_HOST --db $DB_NAME --authenticationDatabase admin --drop  docker/json
+          mongorestore --host $DB_HOST --port 27017 --db $DB_NAME --authenticationDatabase admin --drop  docker/json
         env:
           DB_NAME: ${{ vars.DB_NAME }}
-          DB_HOST: 127.0.0.1
-          DB_PORT: ${{ vars.DB_PORT }}
+          DB_HOST: localhost
+          DB_PORT: 27017
       - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
