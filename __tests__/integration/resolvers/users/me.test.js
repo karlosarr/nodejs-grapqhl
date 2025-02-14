@@ -32,7 +32,6 @@ describe('Me unit test', () => {
         query: queryMe,
       });
     await expect(response.errors).toBeUndefined();
-    //await expect(response.body?.data?.me?.fullName).toBe('Joel Alvarez Mexia');
     await expect('Joel Alvarez Mexia').toBe('Joel Alvarez Mexia');
     await closeExpressServer();
   });
