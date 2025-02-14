@@ -50,7 +50,10 @@ jobs:
           ls -lsha ${{ github.workspace }}/docker/json/users.json
       - name: Restore DB
         run: |
-          'sudo mongoexport -h $DB_HOST:$DB_PORT -d $DB_HOST -c users -o ${{ github.workspace }}/docker/json/users.json'
+          mongoexport -h $DB_HOST:$DB_PORT -d $DB_HOST -c permissions -o ${{ github.workspace }}/docker/json/permissions.json
+          mongoexport -h $DB_HOST:$DB_PORT -d $DB_HOST -c roles -o ${{ github.workspace }}/docker/json/roles.json
+          mongoexport -h $DB_HOST:$DB_PORT -d $DB_HOST -c tokens -o ${{ github.workspace }}/docker/json/tokens.json
+          mongoexport -h $DB_HOST:$DB_PORT -d $DB_HOST -c users -o ${{ github.workspace }}/docker/json/users.json
         #mongorestore --verbose --host $DB_HOST --port $DB_PORT --nsInclude=${DB_NAME}.users --drop  ${{ github.workspace }}/docker/json/users.json
         env:
           DB_NAME: ${{ vars.DB_NAME }}
