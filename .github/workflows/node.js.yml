@@ -43,9 +43,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y mongodb-mongosh mongodb-org-tools
       - name: Test mongo connection & Restore DB
+        run: 'sudo mongosh localhost:27017'
+      - name: Restore DB
         run: |
-          'sudo mongosh localhost:27017'
-          mongorestore --verbose --host $DB_HOST --port 27017 --db $DB_NAME --drop  docker/json
+          'sudo mongorestore --verbose --host $DB_HOST --port 27017 --db $DB_NAME --drop  docker/json'
         env:
           DB_NAME: ${{ vars.DB_NAME }}
           DB_HOST: localhost
