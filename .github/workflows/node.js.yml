@@ -44,10 +44,14 @@ jobs:
           sudo apt-get install -y mongodb-mongosh mongodb-org-tools
       - name: Test mongo connection & Restore DB
         run: 'sudo mongosh localhost:27017'
+      - name: pruebas
+        run: |
+          ls -lsha ls -lsha ${{ github.workspace }}
+          ls -lsha ${{ github.workspace }}/docker/json
+          ls -lsha ${{ github.workspace }}/docker/json/users.json
       - name: Restore DB
         run: |
           'sudo mongorestore --verbose --host $DB_HOST --port 27017 --db $DB_NAME --collection users --drop  ${{ github.workspace }}/docker/json/users.json'
-          ls -lsha ${{ github.workspace }}/docker/json/users.json
         env:
           DB_NAME: ${{ vars.DB_NAME }}
           DB_HOST: localhost
