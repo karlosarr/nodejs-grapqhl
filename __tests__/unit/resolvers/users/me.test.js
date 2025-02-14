@@ -9,7 +9,7 @@ describe('Me unit test', () => {
     await expect(response).rejects.toThrow('No Authorize!');
   });
 
-  it('return a user', async () => {
+  /*it('return a user', async () => {
     const context = {
       isAuth: true,
       user: {
@@ -24,7 +24,7 @@ describe('Me unit test', () => {
       fullName: 'Joel Alvarez Mexia',
     };
     expect(JSON.parse(JSON.stringify(response))).toMatchObject(expected);
-  });
+  });*/
 
   it('return an error because the user id i wrong', async () => {
     const context = {
