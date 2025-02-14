@@ -46,7 +46,6 @@ jobs:
         run: 'sudo mongosh localhost:27017'
       - name: pruebas
         run: |
-          ls -lsha ls -lsha ${{ github.workspace }}
           ls -lsha ${{ github.workspace }}/docker/json
           ls -lsha ${{ github.workspace }}/docker/json/users.json
       - name: Restore DB
