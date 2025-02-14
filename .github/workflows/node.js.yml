@@ -42,8 +42,14 @@ jobs:
           echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
           sudo apt-get update
           sudo apt-get install -y mongodb-mongosh mongodb-org-tools
-      - name: Test mongo connection
-        run: 'sudo mongosh localhost:27017'
+      - name: Test mongo connection & Restore DB
+        run: |
+          'sudo mongosh localhost:27017'
+          mongorestore --verbose --host $DB_HOST --port 27017 --db $DB_NAME --drop  docker/json
+        env:
+          DB_NAME: ${{ vars.DB_NAME }}
+          DB_HOST: localhost
+          DB_PORT: 27017
       - name: create env file
         run: |
           touch .env
@@ -74,13 +80,6 @@ jobs:
           USER_PASSWORD_DUMMY_TEST: ${{ secrets.USER_PASSWORD_DUMMY_TEST }}
           USER_PASSWORD_ENCRYPTED_TEST: ${{ secrets.USER_PASSWORD_ENCRYPTED_TEST }}
           TOKEN_JWT: ${{ secrets.TOKEN_JWT }}
-      - name: Restore DB
-        run: |
-          mongorestore --host $DB_HOST --port 27017 --db $DB_NAME --authenticationDatabase admin --drop  docker/json
-        env:
-          DB_NAME: ${{ vars.DB_NAME }}
-          DB_HOST: localhost
-          DB_PORT: 27017
       - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
