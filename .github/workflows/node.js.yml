@@ -46,7 +46,7 @@ jobs:
         run: 'sudo mongosh localhost:27017'
       - name: Restore DB
         run: |
-          'sudo mongorestore --verbose --host $DB_HOST --port 27017 --db $DB_NAME --drop  ${{ github.workspace }}/docker/json'
+          'sudo mongorestore --verbose --host $DB_HOST --port 27017 --db $DB_NAME --collection users --drop  ${{ github.workspace }}/docker/json/users.json'
         env:
           DB_NAME: ${{ vars.DB_NAME }}
           DB_HOST: localhost
