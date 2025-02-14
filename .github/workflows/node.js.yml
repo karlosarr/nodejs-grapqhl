@@ -50,7 +50,7 @@ jobs:
           ls -lsha ${{ github.workspace }}/docker/json/users.json
       - name: Restore DB
         run: |
-          mongorestore --verbose --host $DB_HOST --port 27017 --db $DB_NAME --collection users --drop  ${{ github.workspace }}/docker/json/users.json
+          mongorestore --verbose --host $DB_HOST --port 27017 --nsInclude=${DB_NAME}.users --drop  ${{ github.workspace }}/docker/json/users.json
         env:
           DB_NAME: ${{ vars.DB_NAME }}
           DB_HOST: localhost
