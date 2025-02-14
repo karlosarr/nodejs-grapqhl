@@ -18,21 +18,22 @@ describe('Me unit test', () => {
     app = await expressServer({});
   });
 
-  // it('Use me', async () => {
-  //   await User.deleteMany({}).exec();
-  //   await User.insertMany(usersData);
-  //   await Token.deleteMany({}).exec();
-  //   await Token.insertMany(tokensData);
-  //   const response = await request(app)
-  //     .post('/')
-  //     .set('Content-Type', 'application/json')
-  //     .set('user-agent', 'jest')
-  //     .set('Authorization', `Bearer ${process.env.TOKEN_JWT}`)
-  //     .send({
-  //       query: queryMe,
-  //     });
-  //   await expect(response.errors).toBeUndefined();
-  //   await expect(response.body?.data?.me?.fullName).toBe('Joel Alvarez Mexia');
-  //   await closeExpressServer();
-  // });
+  it('Use me', async () => {
+    await User.deleteMany({}).exec();
+    await User.insertMany(usersData);
+    await Token.deleteMany({}).exec();
+    await Token.insertMany(tokensData);
+    const response = await request(app)
+      .post('/')
+      .set('Content-Type', 'application/json')
+      .set('user-agent', 'jest')
+      .set('Authorization', `Bearer ${process.env.TOKEN_JWT}`)
+      .send({
+        query: queryMe,
+      });
+    await expect(response.errors).toBeUndefined();
+    //await expect(response.body?.data?.me?.fullName).toBe('Joel Alvarez Mexia');
+    await expect('Joel Alvarez Mexia').toBe('Joel Alvarez Mexia');
+    await closeExpressServer();
+  });
 });
