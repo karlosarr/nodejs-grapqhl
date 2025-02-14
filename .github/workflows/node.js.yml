@@ -54,7 +54,6 @@ jobs:
           mongoimport -h $DB_HOST:$DB_PORT -d $DB_NAME -c roles --file ${{ github.workspace }}/docker/json/roles.json
           mongoimport -h $DB_HOST:$DB_PORT -d $DB_NAME -c tokens --file ${{ github.workspace }}/docker/json/tokens.json
           mongoimport -h $DB_HOST:$DB_PORT -d $DB_NAME -c users --file ${{ github.workspace }}/docker/json/users.json
-        #mongorestore --verbose --host $DB_HOST --port $DB_PORT --nsInclude=${DB_NAME}.users --drop  ${{ github.workspace }}/docker/json/users.json
         env:
           DB_NAME: ${{ vars.DB_NAME }}
           DB_HOST: localhost
