@@ -7,22 +7,22 @@ This README provides a guide for setting up and running the project.
 ## Prerequisities
 
 ```sh
-Node.js v18.17.0
+Node.js v22.14.0
 NVM
 Docker
 ```
 
 ## Step-by-Step Setup Guide
 
-- ### Step 1: Install Node.js v18.17.0
+- ### Step 1: Install Node.js v22.14.0
 
-Before you can run this project, you need to ake sure that Node.js v18.17.0 is isntalled on your computer. To install Node.js, you can download it form the official [Node.js website](https://nodejs.org/)
+Before you can run this project, you need to ake sure that Node.js v22.14.0 is isntalled on your computer. To install Node.js, you can download it form the official [Node.js website](https://nodejs.org/)
 
 > Alternatively, you can use a version manager like `nvm` to install Node.js. Here's how you would install Node.js v14.x using `nvm`:
 
 ```sh
-nvm install 18.17.0
-nvm use 18.17.0
+nvm install 22.14.0
+nvm use 22.14.0
 ```
 
 - ### Step 2: Install Docker
