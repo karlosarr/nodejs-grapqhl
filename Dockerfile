@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:22.14.0-alpine
 ARG USERNAME=nodejs
 ARG USER_UID=1001
 ARG USER_GID=$USER_UID
