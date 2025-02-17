@@ -66,7 +66,7 @@ const expressServer = async ({ url }) => {
 const startServer = async ({ url }) => {
   const app = await expressServer({ url });
   const proxy = http.createServer(app);
-  let port = process.env.GRAPHQL_PORT;
+  let port = process.env.PORT;
   if (process.env.NODE_ENV === 'test') {
     port = process.env.GRAPHQL_PORT_DEV;
   }
